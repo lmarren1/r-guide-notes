@@ -352,4 +352,58 @@ mtcars |>
   geom_boxplot() +
   xlab("") ## the x-axis is meaningless
 
+##------------------------------------------------------------------------------
+## Section 23: Visualizing categorical variables
+##------------------------------------------------------------------------------
+
+# Histogram, density plot, and box plot can be used for numeric and ordinal variables that can be treated numerically
+
+# Counts of categorical variables are displayed as bar graphs, pie charts
+# Avoid pie charts - replace them with bar graphs because they don't show proportions well and they don't show counts
+
+# Ordinal variables - best visualized with bar graphs
+
+##------------------------------------------------------------------------------
+## Section 24: Visualizing categorical and ordinal variables in R
+##------------------------------------------------------------------------------
+
+# If categorical is stored as numeric -> factorize
+
+library(tidyverse)
+
+# Geom Bar
+mtcars |>
+  mutate(cyl = factor(cyl, ordered = TRUE)) |>
+  ggplot(aes(x = cyl)) +
+  geom_bar()
+
+##------------------------------------------------------------------------------
+## Section 25: Visualizing co-varying variables
+##------------------------------------------------------------------------------
+
+# categorical by categorical Cross table - nice way to show how categorical variables co-vary
+
+# Categorical by numerical -> box plot
+# boxes = categorical, whiskers = numerical
+
+# numeric by numeric - scatter plot
+
+##------------------------------------------------------------------------------
+## Section 26: Visualizing variables using R
+##------------------------------------------------------------------------------
+
+# scatter plot w geom_point
+mtcars |>
+  ggplot(aes(x = wt, y = mpg)) +
+  geom_point()
+
+# boxplot w categorical and numeric
+mtcars |>
+  mutate(cyl = factor(cyl)) |>
+  ggplot(aes(x = cyl, y = mpg)) +
+  geom_boxplot()
+
+# cross table for 2 categorical variables
+library(janitor)
+mtcars |> tabyl(cyl, gear)
 
